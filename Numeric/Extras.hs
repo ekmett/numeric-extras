@@ -74,3 +74,5 @@ foreign import ccall unsafe "math.h cbrtf"
     c_cbrtf :: CFloat -> CFloat
 foreign import ccall unsafe "math.h erff"
     c_erff :: CFloat -> CFloat
+
+default (Double)
