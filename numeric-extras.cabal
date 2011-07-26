@@ -1,16 +1,29 @@
-Name:              numeric-extras
-Version:           0.0.2.1
-Synopsis:          Useful tools from the C standard library
-Homepage:          http://github.com/ekmett/numeric-extras
-License:           BSD3
-License-file:      LICENSE
-Author:            Edward Kmett
-Maintainer:        ekmett@gmail.com
-Category:          Math
-Build-type:        Simple
-Cabal-version:     >=1.6
+name:              numeric-extras
+version:           0.0.2.2
+synopsis:          Useful tools from the C standard library
+homepage:          http://github.com/ekmett/numeric-extras
+license:           BSD3
+license-file:      LICENSE
+author:            Edward Kmett
+maintainer:        ekmett@gmail.com
+category:          Math
+build-type:        Simple
+cabal-version:     >=1.6
 
-Library
-  Exposed-modules: Numeric.Extras
-  Build-depends:   base >= 4 && < 5
-  GHC-Options:     -Wall -O2
+source-repository head
+  type: git
+  location: git://github.com/ekmett/numeric-extras.git
+
+library
+  other-extensions:
+    ForeignFunctionInterface
+    FlexibleContexts
+    TypeFamilies
+
+  exposed-modules: 
+    Numeric.Extras
+
+  build-depends:   
+    base >= 4 && < 5
+
+  ghc-options: -Wall -O2
