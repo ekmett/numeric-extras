@@ -20,10 +20,10 @@ library
     FlexibleContexts
     TypeFamilies
 
-  exposed-modules: 
+  exposed-modules:
     Numeric.Extras
 
-  build-depends:   
+  build-depends:
     base >= 4 && < 5
 
   ghc-options: -Wall -O2
