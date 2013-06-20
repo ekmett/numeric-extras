@@ -1,5 +1,5 @@
 name:              numeric-extras
-version:           0.0.2.3
+version:           0.0.3
 synopsis:          Useful tools from the C standard library
 homepage:          http://github.com/ekmett/numeric-extras
 bug-reports:       http://github.com/ekmett/numeric-extras/issues
