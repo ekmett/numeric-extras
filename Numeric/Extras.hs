@@ -53,28 +53,28 @@ lift2F :: (CFloat -> CFloat -> CFloat) -> Float -> Float -> Float
 lift2F f a b = realToFrac (f (realToFrac a) (realToFrac b))
 {-# INLINE lift2F #-}
 
-foreign import ccall unsafe "math.h fmod" 
+foreign import ccall unsafe "math.h fmod"
     c_fmod :: CDouble -> CDouble -> CDouble
-foreign import ccall unsafe "math.h expm1" 
+foreign import ccall unsafe "math.h expm1"
     c_expm1 :: CDouble -> CDouble
-foreign import ccall unsafe "math.h log1p" 
+foreign import ccall unsafe "math.h log1p"
     c_log1p :: CDouble -> CDouble
-foreign import ccall unsafe "math.h hypot" 
+foreign import ccall unsafe "math.h hypot"
     c_hypot :: CDouble -> CDouble -> CDouble
-foreign import ccall unsafe "math.h cbrt" 
+foreign import ccall unsafe "math.h cbrt"
     c_cbrt :: CDouble -> CDouble
 foreign import ccall unsafe "math.h erf"
     c_erf :: CDouble -> CDouble
 
-foreign import ccall unsafe "math.h fmodf" 
+foreign import ccall unsafe "math.h fmodf"
     c_fmodf :: CFloat -> CFloat -> CFloat
-foreign import ccall unsafe "math.h expm1f" 
+foreign import ccall unsafe "math.h expm1f"
     c_expm1f :: CFloat -> CFloat
-foreign import ccall unsafe "math.h log1pf" 
+foreign import ccall unsafe "math.h log1pf"
     c_log1pf :: CFloat -> CFloat
-foreign import ccall unsafe "math.h hypotf" 
+foreign import ccall unsafe "math.h hypotf"
     c_hypotf :: CFloat -> CFloat -> CFloat
-foreign import ccall unsafe "math.h cbrtf" 
+foreign import ccall unsafe "math.h cbrtf"
     c_cbrtf :: CFloat -> CFloat
 foreign import ccall unsafe "math.h erff"
     c_erff :: CFloat -> CFloat
