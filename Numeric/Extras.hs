@@ -26,6 +26,7 @@ class (Storable (C a), RealFloat (C a), RealFloat a) => RealExtras a where
     cbrt  :: a -> a
     erf   :: a -> a
     floor :: a -> a
+    ceil  :: a -> a
     trunc :: a -> a
     modf  :: a -> (a, a)
     remainder :: a -> a -> a
@@ -39,6 +40,7 @@ instance RealExtras Double where
     cbrt = lift1D c_cbrt
     erf = lift1D c_erf
     floor = lift1D c_floor
+    ceil  = lift1D c_ceil
     trunc = lift1D c_trunc
     modf = lift1D2 c_modf
     remainder = lift2D c_remainder
@@ -67,6 +69,7 @@ instance RealExtras Float where
     cbrt  = lift1F c_cbrtf
     erf   = lift1F c_erff
     floor = lift1F c_floorf
+    ceil  = lift1F c_ceilf
     trunc = lift1F c_truncf
     modf = lift1F2 c_modff
     remainder = lift2F c_remainderf
@@ -100,6 +103,8 @@ foreign import ccall unsafe "math.h erf"
     c_erf :: CDouble -> CDouble
 foreign import ccall unsafe "math.h floor"
     c_floor :: CDouble -> CDouble
+foreign import ccall unsafe "math.h ceil"
+    c_ceil :: CDouble -> CDouble
 foreign import ccall unsafe "math.h trunc"
     c_trunc :: CDouble -> CDouble
 foreign import ccall unsafe "math.h modf"
@@ -121,6 +126,8 @@ foreign import ccall unsafe "math.h erff"
     c_erff :: CFloat -> CFloat
 foreign import ccall unsafe "math.h floorf"
     c_floorf :: CFloat -> CFloat
+foreign import ccall unsafe "math.h ceilf"
+    c_ceilf :: CFloat -> CFloat
 foreign import ccall unsafe "math.h truncf"
     c_truncf :: CFloat -> CFloat
 foreign import ccall unsafe "math.h modff"
