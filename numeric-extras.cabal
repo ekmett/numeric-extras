@@ -1,6 +1,7 @@
 name:              numeric-extras
 version:           0.0.4
 synopsis:          Useful tools from the C standard library
+description:       Useful tools from the C standard library
 homepage:          http://github.com/ekmett/numeric-extras
 bug-reports:       http://github.com/ekmett/numeric-extras/issues
 license:           BSD3
@@ -10,6 +11,8 @@ maintainer:        ekmett@gmail.com
 category:          Math
 build-type:        Simple
 cabal-version:     >=1.6
+tested-with:       GHC ==7.0.4, GHC ==7.2.2, GHC ==7.4.2,
+                   GHC ==7.6.3, GHC ==7.8.4, GHC ==7.10.2
 
 extra-source-files: .travis.yml CHANGELOG.markdown
 

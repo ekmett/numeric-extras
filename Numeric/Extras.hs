@@ -13,7 +13,11 @@ import Control.Applicative ((<$>), (<*>))
 import Control.Arrow ((***))
 import Foreign
 import Foreign.C.Types
+#if defined(__GLASGOW_HASKELL__) && __GLASGOW_HASKELL__ >= 702
 import System.IO.Unsafe (unsafeDupablePerformIO)
+#else
+import System.IO.Unsafe (unsafePerformIO)
+#endif
 
 {-# ANN module "HLint: ignore Use camelCase" #-}
 
@@ -58,7 +62,11 @@ lift2D f a b = realToFrac (f (realToFrac a) (realToFrac b))
 {-# INLINE lift2D #-}
 
 c_modf :: CDouble -> (CDouble, CDouble)
-c_modf a = unsafeDupablePerformIO $ alloca (\i -> (,) <$> c_modf_imp a i <*> peek i)
+#if defined(__GLASGOW_HASKELL__) && __GLASGOW_HASKELL__ >= 702
+c_modf a = unsafeDupablePerformIO $ alloca $ \i -> (,) <$> c_modf_imp a i <*> peek i
+#else
+c_modf a = unsafePerformIO $ alloca $ \i -> (,) <$> c_modf_imp a i <*> peek i
+#endif
 
 instance RealExtras Float where
     type C Float = CFloat
