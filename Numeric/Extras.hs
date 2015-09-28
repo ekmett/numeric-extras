@@ -95,7 +95,11 @@ lift2F f a b = realToFrac (f (realToFrac a) (realToFrac b))
 {-# INLINE lift2F #-}
 
 c_modff :: CFloat -> (CFloat, CFloat)
-c_modff a = unsafeDupablePerformIO $ alloca (\i -> (,) <$> c_modff_imp a i <*> peek i)
+#if defined(__GLASGOW_HASKELL__) && __GLASGOW_HASKELL__ >= 702
+c_modff a = unsafeDupablePerformIO $ alloca $ \i -> (,) <$> c_modff_imp a i <*> peek i
+#else
+c_modff a = unsafePerformIO $ alloca $ \i -> (,) <$> c_modff_imp a i <*> peek i
+#endif
 
 foreign import ccall unsafe "math.h fmod"
     c_fmod :: CDouble -> CDouble -> CDouble
