@@ -21,6 +21,12 @@ source-repository head
   location: git://github.com/ekmett/numeric-extras.git
 
 library
+  -- This library won't work correctly in the runtime linker on old versions
+  -- of GHC on Windows due to GHC Trac #3242. See also
+  -- https://github.com/ekmett/numeric-extras/issues/1
+  if os(windows) && !impl(ghc >= 8.0)
+    buildable: False
+
   other-extensions:
     ForeignFunctionInterface
     FlexibleContexts
