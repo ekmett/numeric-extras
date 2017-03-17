@@ -31,22 +31,24 @@ class (Storable (C a), RealFloat (C a), RealFloat a) => RealExtras a where
     erf   :: a -> a
     floor :: a -> a
     ceil  :: a -> a
+    round :: a -> a
     trunc :: a -> a
     modf  :: a -> (a, a)
     remainder :: a -> a -> a
 
 instance RealExtras Double where
     type C Double = CDouble
-    fmod = lift2D c_fmod
+    fmod  = lift2D c_fmod
     expm1 = lift1D c_expm1
     log1p = lift1D c_log1p
     hypot = lift2D c_hypot
-    cbrt = lift1D c_cbrt
-    erf = lift1D c_erf
+    cbrt  = lift1D c_cbrt
+    erf   = lift1D c_erf
     floor = lift1D c_floor
     ceil  = lift1D c_ceil
+    round = lift1D c_round
     trunc = lift1D c_trunc
-    modf = lift1D2 c_modf
+    modf  = lift1D2 c_modf
     remainder = lift2D c_remainder
 
 lift1D :: (CDouble -> CDouble) -> Double -> Double
@@ -70,7 +72,7 @@ c_modf a = unsafePerformIO $ alloca $ \i -> (,) <$> c_modf_imp a i <*> peek i
 
 instance RealExtras Float where
     type C Float = CFloat
-    fmod = lift2F c_fmodf
+    fmod  = lift2F c_fmodf
     expm1 = lift1F c_expm1f
     log1p = lift1F c_log1pf
     hypot = lift2F c_hypotf
@@ -78,8 +80,9 @@ instance RealExtras Float where
     erf   = lift1F c_erff
     floor = lift1F c_floorf
     ceil  = lift1F c_ceilf
+    round = lift1F c_roundf
     trunc = lift1F c_truncf
-    modf = lift1F2 c_modff
+    modf  = lift1F2 c_modff
     remainder = lift2F c_remainderf
 
 lift1F :: (CFloat -> CFloat) -> Float -> Float
@@ -117,6 +120,8 @@ foreign import ccall unsafe "math.h floor"
     c_floor :: CDouble -> CDouble
 foreign import ccall unsafe "math.h ceil"
     c_ceil :: CDouble -> CDouble
+foreign import ccall unsafe "math.h round"
+    c_round :: CDouble -> CDouble
 foreign import ccall unsafe "math.h trunc"
     c_trunc :: CDouble -> CDouble
 foreign import ccall unsafe "math.h modf"
@@ -140,6 +145,8 @@ foreign import ccall unsafe "math.h floorf"
     c_floorf :: CFloat -> CFloat
 foreign import ccall unsafe "math.h ceilf"
     c_ceilf :: CFloat -> CFloat
+foreign import ccall unsafe "math.h roundf"
+    c_roundf :: CFloat -> CFloat
 foreign import ccall unsafe "math.h truncf"
     c_truncf :: CFloat -> CFloat
 foreign import ccall unsafe "math.h modff"
